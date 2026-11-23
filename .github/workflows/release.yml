@@ -1,0 +1,32 @@
+name: Publish release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Build runtime assets
+        run: rm -rf dist && npm run build
+      - name: Package installable plugin
+        run: |
+          mkdir -p release/air66Theme
+          cp plugin.php LICENSE.md release/air66Theme/
+          cp -R dist release/air66Theme/dist
+          (cd release && zip -qr ../air66Theme.zip air66Theme)
+      - name: Publish GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create "$GITHUB_REF_NAME" air66Theme.zip --title "$GITHUB_REF_NAME" --generate-notes
