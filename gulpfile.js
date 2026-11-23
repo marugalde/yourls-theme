@@ -2,7 +2,6 @@
 // Importing specific gulp API functions lets us write them below as series() instead of gulp.series()
 const { src, dest, watch, series, parallel } = require('gulp');
 // Importing all the Gulp-related packages we want to use
-const sourcemaps = require('gulp-sourcemaps');
 const sass = require('gulp-sass')(require('sass'));
 const concat = require('gulp-concat');
 const uglify = require('gulp-uglify');
@@ -15,16 +14,15 @@ var replace = require('gulp-replace');
 // File paths
 const files = { 
     scssPath: 'app/scss/**/*.scss',
-    jsPath: 'app/js/**/*.js'
+    jsPath: 'app/js/**/*.js',
+    assetsPath: 'app/assets/**/*'
 }
 
 // Sass task: compiles the style.scss file into style.css
 function scssTask(){    
     return src(files.scssPath)
-        .pipe(sourcemaps.init()) // initialize sourcemaps first
         .pipe(sass()) // compile SCSS to CSS
         .pipe(postcss([ autoprefixer(), cssnano() ])) // PostCSS plugins
-        .pipe(sourcemaps.write('.')) // write sourcemaps file in current directory
         .pipe(dest('dist')
     ); // put final CSS in dist folder
 }
@@ -41,6 +39,11 @@ function jsTask(){
     );
 }
 
+function assetsTask(){
+    return src(files.assetsPath)
+        .pipe(dest('dist'));
+}
+
 // Cachebust
 var cbString = new Date().getTime();
 function cacheBustTask(){
@@ -52,23 +55,23 @@ function cacheBustTask(){
 // Watch task: watch SCSS and JS files for changes
 // If any change, run scss and js tasks simultaneously
 function watchTask(){
-    watch([files.scssPath, files.jsPath], 
-        parallel(scssTask, jsTask));    
+    watch([files.scssPath, files.jsPath, files.assetsPath],
+        parallel(scssTask, jsTask, assetsTask));
 }
 
 // Export the default Gulp task so it can be run
 // Runs the scss and js tasks simultaneously
 // then runs cacheBust, then watch task
 exports.default = series(
-    parallel(scssTask, jsTask), 
+    parallel(scssTask, jsTask, assetsTask),
     cacheBustTask,
     watchTask
 );
 
 exports.scssTask = scssTask;
 exports.jsTask = jsTask;
+exports.assetsTask = assetsTask;
 exports.cacheBustTask = cacheBustTask;
 exports.build = series(
-    parallel(scssTask, jsTask),
-    cacheBustTask
+    parallel(scssTask, jsTask, assetsTask)
 );
