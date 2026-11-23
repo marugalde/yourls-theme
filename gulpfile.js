@@ -40,7 +40,8 @@ function jsTask(){
 }
 
 function assetsTask(){
-    return src(files.assetsPath)
+    // Keep binary images as buffers; UTF-8 decoding corrupts them.
+    return src(files.assetsPath, { encoding: false })
         .pipe(dest('dist'));
 }
 
