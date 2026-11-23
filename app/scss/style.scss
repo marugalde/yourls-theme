@@ -26,11 +26,57 @@ $accent:    $secondary;
 // Text colours
 $title:    $primary;
 
+:root {
+  color-scheme: light;
+  --theme-page: #{$tertiary};
+  --theme-surface: #{$white};
+  --theme-surface-alt: #{$default};
+  --theme-surface-raised: #{$lightest};
+  --theme-text: #{$text};
+  --theme-muted: #828282;
+  --theme-border: #d3d6dc;
+  --theme-input-bg: #{$white};
+  --theme-input-text: #343a40;
+  --theme-chrome: #{$primary};
+  --theme-chrome-raised: #{lighten($primary, 10%)};
+  --theme-accent-text: #{$white};
+  --bs-body-bg: var(--theme-page);
+  --bs-body-color: var(--theme-text);
+  --bs-border-color: var(--theme-border);
+  --bs-secondary-bg: var(--theme-surface-alt);
+  --bs-tertiary-bg: var(--theme-surface-raised);
+  --bs-secondary-color: var(--theme-muted);
+  --bs-heading-color: var(--theme-text);
+  --bs-link-color: #{$secondary};
+  --bs-link-hover-color: #{darken($secondary, 10%)};
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --theme-page: #141820;
+    --theme-surface: #1c222c;
+    --theme-surface-alt: #222a35;
+    --theme-surface-raised: #303a48;
+    --theme-text: #d8dee8;
+    --theme-muted: #b6c0cf;
+    --theme-border: #3e4959;
+    --theme-input-bg: #171d26;
+    --theme-input-text: #e4e9f0;
+    --theme-chrome: #0c1118;
+    --theme-chrome-raised: #202936;
+    --theme-accent-text: #102125;
+    --bs-emphasis-color: #f0f3f8;
+    --bs-secondary-color: var(--theme-muted);
+    --bs-link-hover-color: #72e4eb;
+  }
+}
+
 /* GENRAL STYLES */
 
 body {
-	background-color: $tertiary;
-	color: $text;
+	background-color: var(--theme-page);
+	color: var(--theme-text);
 	//font-size: 1rem !important;
 	padding: 0;
 	
@@ -84,7 +130,8 @@ p {
 input {
 	outline: none !important;
 	padding: 10px;
-	background: $white !important;
+	background: var(--theme-input-bg) !important;
+	color: var(--theme-input-text);
 	max-width: 100% !important;
 }
 
@@ -95,7 +142,7 @@ input.text {
 
 input.button {
 	font-weight: normal;
-	color: $white;
+	color: var(--theme-accent-text);
 	padding: 10px 25px;
 	margin-top: 15px !important;
 	background: $secondary !important;
@@ -120,7 +167,7 @@ select {
 	-webkit-appearance: none;
 	-moz-appearance: none;
 	appearance: none;
-	color: $text;
+	color: var(--theme-input-text);
 	background: url(data:image/png;base64,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) 96% / 15% no-repeat $white;
 	margin: 5px 10px;
   transition: 0.4s all;
@@ -187,7 +234,7 @@ select:hover {
 /* HEADER */
 
 .site-header {
-	background: $primary;
+	background: var(--theme-chrome);
 	z-index: 9;
 	position: fixed;
 	top: 0;
@@ -218,7 +265,7 @@ select:hover {
 	left: 0;
 	width: 100%;
 	z-index: 8;
-	background: lighten($primary, 10%);
+	background: var(--theme-chrome-raised);
 	padding: 5px 20px;
 	
 	#new_url_form {
@@ -387,7 +434,7 @@ header[role=banner] {
 }
 
 div.share {
-  background: $default;
+  background: var(--theme-surface-alt);
   border-radius: 0;
   border: none;
   padding: 0px 20px 10px;
@@ -400,8 +447,8 @@ div.share {
 	}
 
   textarea {
-    background: $light;
-    color: $text;
+    background: var(--theme-input-bg);
+    color: var(--theme-input-text);
     border: none;
     padding: 3px;
     outline: none;
@@ -412,11 +459,11 @@ div.share {
 
   #charcount {
     padding-left: 5px;
-    color: $text;
+    color: var(--theme-text);
   }
 
   #share_links a {
-    color: $text;
+    color: var(--theme-text);
   }
 }
 
@@ -425,7 +472,7 @@ div.share {
   flex-wrap: nowrap;
   overflow-x: auto;
 	width: 100%;
-	background: $white;
+	background: var(--theme-surface);
 }
 
 #stat_tab_stats, #stat_tab_location, #stat_tab_sources, #stat_tab_share {
@@ -438,7 +485,7 @@ div.share {
 
 
 nav {
-    background: $primary;
+    background: var(--theme-chrome);
 	color: $white;
     height: 100%;
     position: fixed;
@@ -508,7 +555,7 @@ ul#admin_menu li:hover {
 	  max-width: 100%;
 
     .tab {
-      background: $light !important;
+      background: var(--theme-surface) !important;
     }
 
     .wrap_unfloat {
@@ -523,11 +570,11 @@ ul#admin_menu li:hover {
     }
 
     li {
-      color: $text;
+      color: var(--theme-text);
     }
 
     #historical_clicks li:hover {
-      background: #5f5f5f !important;
+      background: var(--theme-surface-raised) !important;
     }
 
     ul#headers li a,
@@ -535,15 +582,15 @@ ul#admin_menu li:hover {
       outline: none;
       border: none;
       border-radius: 0;
-      background: $light;
-      color: $text;
+      background: var(--theme-surface);
+      color: var(--theme-text);
       padding: 10px 15px 7px 25px;
 	display: inline-block;
 	margin-top: 5px;
     margin-bottom: 5px;
 
       &:hover {
-        background: darken($default, 10%);
+        background: var(--theme-surface-raised);
       }
 
       h2 {
@@ -552,11 +599,11 @@ ul#admin_menu li:hover {
       }
 
       &.selected {
-        background: $lightest;
+        background: var(--theme-surface-raised);
         border-bottom: 2px solid $accent;
 
         &:hover {
-          background: darken($default, 15%);
+          background: var(--theme-surface-raised);
         }
       }
     }
@@ -581,15 +628,15 @@ ul#admin_menu li:hover {
 // TABLE
 
   table.tblSorter {
-    background-color: $default;
-    color: $text;
+    background-color: var(--theme-surface-alt);
+    color: var(--theme-text);
 
     a {
-      color: $text;
+      color: var(--theme-text);
     }
 
     small a {
-      color: darken($white, 50%)
+      color: var(--theme-muted);
     }
 
     thead tr .tablesorter-header {
@@ -597,7 +644,7 @@ ul#admin_menu li:hover {
     }
 
     tfoot tr {
-      background-color: $default;
+      background-color: var(--theme-surface-alt);
     }
 
     thead tr th,
@@ -611,23 +658,23 @@ ul#admin_menu li:hover {
 
     thead tr .tablesorter-headerAsc,
     thead tr .tablesorter-headerDesc {
-      background-color: $lightest !important;
+      background-color: var(--theme-surface-raised) !important;
     }
 
     tbody td {
-      color: $text;
+      color: var(--theme-text);
       padding: 5px;
-      background-color: $light;
+      background-color: var(--theme-surface);
       vertical-align: middle;
       transition: 0.4s all;
     }
 
     tbody tr:hover td {
-      background-color: $lightest !important;
+      background-color: var(--theme-surface-raised) !important;
     }
 
     tbody tr.normal-row td {
-      background: $light;
+      background: var(--theme-surface);
     }
 
     .keyword {
@@ -640,16 +687,16 @@ ul#admin_menu li:hover {
     }
 
     .navigation .nav_link a {
-        background: $light;
+        background: var(--theme-surface);
         border: none;
 
         &:hover {
-          background: $lightest;
+          background: var(--theme-surface-raised);
         }
     }
 
     tr.edit-row td {
-      background: $default !important;
+      background: var(--theme-surface-alt) !important;
     }
 	  
 	  td.actions .button {
@@ -710,7 +757,7 @@ ul#admin_menu li:hover {
 #footer {
   bottom: 0;
   //width: 230px;
-  color: #828282;
+  color: var(--theme-muted);
 	font-size: 0.8rem;
   padding: 10px;
   text-align: right;
@@ -724,10 +771,10 @@ ul#admin_menu li:hover {
     a {
       background: none;
       padding-left: 0;
-      color: $text;
+      color: var(--theme-text);
 
       &:hover {
-        color: #828282;
+        color: var(--theme-text);
       }
     }
   }
@@ -763,6 +810,85 @@ ul#admin_menu li:hover {
 		align-items: stretch;
 	  }
 	}
+}
+
+@media (prefers-color-scheme: dark) {
+  body,
+  #wrap,
+  main {
+    background-color: var(--theme-page);
+    color: var(--theme-text);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  label,
+  .login #login {
+    color: var(--theme-text);
+  }
+
+  .login #login {
+    background-color: var(--theme-surface);
+  }
+
+  #wrap a,
+  .infos a,
+  #footer a {
+    color: var(--bs-link-color);
+  }
+
+  input:not(.button),
+  textarea,
+  select,
+  .form-control,
+  .form-select {
+    background-color: var(--theme-input-bg) !important;
+    border-color: var(--theme-border) !important;
+    color: var(--theme-input-text) !important;
+  }
+
+  select,
+  select:hover {
+    -webkit-appearance: auto;
+    -moz-appearance: auto;
+    appearance: auto;
+    background-image: none;
+    padding-right: 10px;
+  }
+
+  input.button,
+  #add-button,
+  .form-wrap #new_url_form #add-button {
+    color: var(--theme-accent-text);
+  }
+
+  #wrap a:hover,
+  .infos a:hover,
+  #footer a:hover {
+    color: var(--bs-link-hover-color);
+  }
+
+  input:not(.button):focus-visible,
+  textarea:focus-visible,
+  select:focus-visible,
+  .form-control:focus-visible,
+  .form-select:focus-visible,
+  input.button:focus-visible,
+  #add-button:focus-visible,
+  a:focus-visible {
+    outline: 2px solid #72e4eb !important;
+    outline-offset: 2px;
+  }
+
+  .notice p {
+    color: var(--theme-accent-text);
+  }
+
+  .btn-close {
+    filter: invert(1);
+  }
 }
 
     
