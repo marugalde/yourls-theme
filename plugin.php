@@ -3,7 +3,7 @@
 Plugin Name: Air 66 Design Ltd Theme
 Plugin URI: https://air66design.com
 Description: This plugin is a responsive design restyle of the YOURLS admin 
-Version: 1.0.1
+Version: 1.0.2
 Author: David Robinson
 Author URI: https://air66design.com
 */

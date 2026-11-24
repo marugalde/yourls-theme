@@ -7,9 +7,9 @@
 
 $primary: #272b35;
 $white: #ffffff;
-$secondary: #2cd1dd;
+$secondary: #006b75;
 $tertiary: #efefef;
-$text: #929292;
+$text: #595959;
 $footer: darken( $primary, 10% );
 
 // Set up our basic colour scheme
@@ -33,7 +33,7 @@ $title:    $primary;
   --theme-surface-alt: #{$default};
   --theme-surface-raised: #{$lightest};
   --theme-text: #{$text};
-  --theme-muted: #828282;
+  --theme-muted: #595959;
   --theme-border: #d3d6dc;
   --theme-input-bg: #{$white};
   --theme-input-text: #343a40;
@@ -49,6 +49,7 @@ $title:    $primary;
   --bs-heading-color: var(--theme-text);
   --bs-link-color: #{$secondary};
   --bs-link-hover-color: #{darken($secondary, 10%)};
+  --bs-code-color: #9c174d;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -65,10 +66,12 @@ $title:    $primary;
     --theme-input-text: #e4e9f0;
     --theme-chrome: #0c1118;
     --theme-chrome-raised: #202936;
-    --theme-accent-text: #102125;
+    --theme-accent-text: #ffffff;
     --bs-emphasis-color: #f0f3f8;
     --bs-secondary-color: var(--theme-muted);
-    --bs-link-hover-color: #72e4eb;
+    --bs-link-color: #72e4eb;
+    --bs-link-hover-color: #a2f1f5;
+    --bs-code-color: #ff9dbf;
   }
 }
 
@@ -84,6 +87,30 @@ body {
 		font-family: 'Open Sans', sans-serif !important;
 	}
 	
+}
+
+#wrap a,
+.infos a {
+  color: var(--bs-link-color);
+  text-decoration: underline;
+}
+
+#wrap a:hover,
+.infos a:hover {
+  color: var(--bs-link-hover-color);
+}
+
+#wrap nav[role="navigation"] a,
+#wrap nav[role="navigation"] a:link,
+#wrap nav[role="navigation"] a:active,
+#wrap nav[role="navigation"] a:visited {
+  color: $white;
+  text-decoration: none;
+}
+
+#wrap nav[role="navigation"] a:focus-visible {
+  color: #72e4eb;
+  text-decoration: underline;
 }
 
 h3 {
@@ -512,7 +539,7 @@ nav {
 }
 
 nav a:active:hover, nav a:hover, nav a:link:hover, nav a:visited:hover {
-    color: $secondary !important;
+    color: #72e4eb !important;
 }
 
 ul#admin_menu li {
@@ -772,6 +799,7 @@ ul#admin_menu li:hover {
       background: none;
       padding-left: 0;
       color: var(--theme-text);
+      text-decoration: underline;
 
       &:hover {
         color: var(--theme-text);
@@ -870,6 +898,21 @@ ul#admin_menu li:hover {
     color: var(--bs-link-hover-color);
   }
 
+  main.sub_wrap span,
+  main.sub_wrap tt {
+    color: #202936;
+  }
+
+  main.sub_wrap code {
+    background-color: var(--theme-surface-raised);
+  }
+
+  #wrap a.bookmarklet {
+    background-color: var(--theme-surface-raised);
+    border-color: #72e4eb;
+    color: #72e4eb;
+  }
+
   input:not(.button):focus-visible,
   textarea:focus-visible,
   select:focus-visible,
@@ -888,6 +931,290 @@ ul#admin_menu li:hover {
 
   .btn-close {
     filter: invert(1);
+  }
+
+  body.plugin_page_language-switcher {
+    .ls-title-text {
+      background: none;
+      color: var(--theme-text);
+      -webkit-text-fill-color: var(--theme-text);
+    }
+
+    .plugin-version,
+    .ls-panel small,
+    .plugin-footer {
+      color: var(--theme-muted);
+    }
+
+    .ls-panel {
+      background: var(--theme-surface);
+      border-color: var(--theme-border);
+      color: var(--theme-text);
+      box-shadow: none;
+    }
+
+    .ls-panel h3,
+    .ls-info-title {
+      color: #72e4eb;
+    }
+
+    .ls-row label {
+      color: var(--theme-text);
+    }
+
+    .ls-info-box {
+      background: var(--theme-surface-alt);
+      border-left-color: #72e4eb;
+      color: var(--theme-text);
+    }
+
+    .ls-info-icon {
+      background: #72e4eb;
+      color: #141820;
+    }
+
+    .ls-info-list a,
+    .plugin-footer a {
+      color: var(--bs-link-color);
+      text-decoration: underline;
+    }
+
+    .ls-info-list code,
+    .ls-no-langs code {
+      background: var(--theme-surface-raised);
+      color: #ff9dbf;
+    }
+
+    .ls-no-langs,
+    .notice-warning {
+      background: #3a2e1d;
+      border-left-color: #f5c87a;
+      color: #f5c87a;
+    }
+
+    .notice-success {
+      background: #1d3a2a;
+      border-left-color: #5fcc7c;
+      color: #b8e4c7;
+    }
+
+    .ls-update-badge {
+      background: var(--theme-surface-raised);
+      border-color: #72e4eb;
+      color: #a2f1f5;
+    }
+
+    .ls-actions .button {
+      background: var(--theme-surface-raised) !important;
+      border-color: #72e4eb !important;
+      color: #f0f3f8 !important;
+    }
+
+    .ls-actions .button:hover,
+    .ls-actions .button:focus {
+      background: var(--theme-chrome-raised) !important;
+      border-color: #a2f1f5 !important;
+      color: #ffffff !important;
+    }
+
+    .plugin-footer {
+      border-top-color: var(--theme-border);
+    }
+  }
+
+  body.plugin_page_plugin_manager {
+    --ypm-fg: var(--theme-text);
+    --ypm-fg-muted: var(--theme-muted);
+    --ypm-fg-faint: var(--theme-muted);
+    --ypm-link: var(--bs-link-color);
+    --ypm-link-strong: var(--bs-link-hover-color);
+    --ypm-bg: var(--theme-surface);
+    --ypm-bg-soft: var(--theme-surface-alt);
+    --ypm-bg-section: var(--theme-surface);
+    --ypm-bg-row-odd: var(--theme-surface-alt);
+    --ypm-bg-row-even: var(--theme-surface);
+    --ypm-border: var(--theme-border);
+    --ypm-border-strong: #526177;
+    --ypm-border-accent: #72e4eb;
+    --ypm-border-hover: #a2f1f5;
+    --ypm-input-border: #526177;
+    --ypm-input-border-focus: #72e4eb;
+    --ypm-shadow: none;
+    --ypm-success-bg: #1d3a2a;
+    --ypm-success-fg: #5fcc7c;
+    --ypm-error-bg: #3a1d1d;
+    --ypm-error-fg: #ff8a8a;
+    --ypm-warn-bg: #3a2e1d;
+    --ypm-warn-fg: #f5c87a;
+    --ypm-warn-text: #f5c87a;
+    --ypm-info-bg: var(--theme-surface-alt);
+    --ypm-update-badge-bg: var(--theme-surface-raised);
+    --ypm-source-only-fg: #c9b8ed;
+
+    .plugin-title-text {
+      background: none;
+      color: #72e4eb;
+      -webkit-text-fill-color: #72e4eb;
+    }
+
+    .plugin-version,
+    .ypm-actions-legend {
+      color: var(--theme-muted);
+    }
+
+    .ypm-installed-header,
+    .ypm-table-infobox,
+    .ypm-modal-plugin-line {
+      background: var(--theme-surface-alt);
+      border-color: var(--theme-border);
+      color: var(--theme-text);
+    }
+
+    .ypm-installed-header {
+      border-left-color: #72e4eb;
+    }
+
+    .ypm-installed-meta-times,
+    .form-section,
+    .ypm-modal-dialog {
+      background: var(--theme-surface);
+      border-color: var(--theme-border);
+      color: var(--theme-text);
+      box-shadow: none;
+    }
+
+    .ypm-meta-time,
+    .ypm-section-title,
+    .ypm-modal-dialog h3 {
+      color: #72e4eb;
+    }
+
+    .ypm-help-text,
+    .ypm-plugin-meta,
+    .ypm-actions-legend,
+    .ypm-text-muted,
+    .ypm-empty-state,
+    .ypm-status-up-to-date,
+    .ypm-status-no-repo,
+    .ypm-check-detail,
+    .ypm-my-plugins-selectors {
+      color: var(--theme-muted);
+      opacity: 1;
+    }
+
+    .ypm-update-badge {
+      background: var(--theme-surface-raised);
+      border-color: #72e4eb;
+      color: #a2f1f5;
+    }
+
+    .ypm-panel-divider {
+      border-top-color: var(--theme-border);
+    }
+
+    .ypm-drawer-toggle {
+      background: var(--theme-surface-raised);
+      border-color: #526177;
+      color: var(--theme-text);
+    }
+
+    .ypm-drawer-toggle.is-active {
+      background: #006b75;
+      border-color: #72e4eb;
+      color: #ffffff;
+    }
+
+    .ypm-installed-actions .button,
+    .ypm-panel-main .button,
+    #github-token-form .button,
+    #ypm-links-per-page-form .button,
+    .ypm-modal-actions .button,
+    .ypm-icon-button {
+      background: var(--theme-surface-raised) !important;
+      border-color: #72e4eb !important;
+      color: #f0f3f8 !important;
+    }
+
+    .ypm-installed-actions .button:hover:not(:disabled),
+    .ypm-installed-actions .button:focus:not(:disabled),
+    .ypm-panel-main .button:hover:not(:disabled),
+    .ypm-panel-main .button:focus:not(:disabled),
+    #github-token-form .button:hover:not(:disabled),
+    #github-token-form .button:focus:not(:disabled),
+    #ypm-links-per-page-form .button:hover:not(:disabled),
+    #ypm-links-per-page-form .button:focus:not(:disabled),
+    .ypm-modal-actions .button:hover:not(:disabled),
+    .ypm-modal-actions .button:focus:not(:disabled),
+    .ypm-icon-button:hover:not(:disabled),
+    .ypm-icon-button:focus:not(:disabled) {
+      background: var(--theme-chrome-raised) !important;
+      border-color: #a2f1f5 !important;
+      color: #ffffff !important;
+    }
+
+    .ypm-installed-actions .button:disabled,
+    .ypm-panel-main .button:disabled,
+    #github-token-form .button:disabled,
+    #ypm-links-per-page-form .button:disabled,
+    .ypm-modal-actions .button:disabled,
+    .ypm-icon-button:disabled {
+      background: var(--theme-surface) !important;
+      border-color: var(--theme-border) !important;
+      color: var(--theme-muted) !important;
+      opacity: 0.8;
+    }
+
+    .ypm-upload-input::file-selector-button {
+      background: var(--theme-surface-raised);
+      border-color: #72e4eb;
+      color: var(--theme-text);
+    }
+
+    .ypm-upload-input::file-selector-button:hover {
+      background: var(--theme-chrome-raised);
+      border-color: #a2f1f5;
+      color: #ffffff;
+    }
+
+    .ypm-legend-row th {
+      color: var(--theme-text);
+    }
+
+    .ypm-status-dot-active {
+      background: #5fcc7c;
+    }
+
+    .ypm-status-dot-inactive {
+      background: #9aa8b8;
+    }
+
+    .ypm-my-plugin-row-installed,
+    .ypm-my-plugins-selectors-inactive {
+      opacity: 0.8;
+    }
+
+    .ypm-table-infobox-title {
+      color: #72e4eb;
+    }
+
+    .ypm-modal-close {
+      color: var(--theme-muted);
+    }
+
+    .ypm-modal-close:hover {
+      color: #a2f1f5;
+    }
+
+    .plugin-footer {
+      color: var(--theme-muted);
+      border-top-color: var(--theme-border);
+      opacity: 1;
+    }
+
+    .plugin-footer a {
+      color: var(--bs-link-color);
+      text-decoration: underline;
+    }
   }
 }
 

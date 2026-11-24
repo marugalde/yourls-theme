@@ -10,19 +10,43 @@ The tables and graphs have a horizontal scroll on mobile when the viewport becom
 
 **[Air 66 Design Website](https://air66design.com)**
 
-## Screen Shots
+## Screenshots
 
-**LOGIN PAGE**
+### Light mode
+
+**Login**
 
 ![](screenshots/login.png)
 
-**ADMIN PAGE**
+**Admin**
 
 ![](screenshots/admin.png)
 
-**NAV OPEN**
+**Navigation open**
 
 ![](screenshots/nav-open.png)
+
+### Dark mode
+
+**Login**
+
+![](screenshots/login-dark.png)
+
+**Admin**
+
+![](screenshots/admin-dark.png)
+
+**Navigation open**
+
+![](screenshots/nav-open-dark.png)
+
+**Language Switcher**
+
+![](screenshots/language-switcher-dark.png)
+
+**Advanced Plugin Manager**
+
+![](screenshots/advanced-plugin-manager-dark.png)
 
 ## Installing
 
